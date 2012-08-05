@@ -1,0 +1,152 @@
+In the world of open source software, the Concurrent Versions System (CVS) was the tool of choice for version control for many years. And rightly so. CVS was open source software itself, and its nonrestrictive modus operandi and support for networked operation allowed dozens of geographically dispersed programmers to share their work. It fit the collaborative nature of the open source world very well. CVS and its semi-chaotic development model have since become cornerstones of open source culture.
+
+But CVS was not without its flaws, and simply fixing those flaws promised to be an enormous effort. Enter Subversion. Subversion was designed to be a successor to CVS, and its originators set out to win the hearts of CVS users in two ways—by creating an open source system with a design (and “look and feel”) similar to CVS, and by attempting to avoid most of CVS's noticeable flaws. While the result isn't necessarily the next great evolution in version control design, Subversion is very powerful, very usable, and very flexible. And for the most part, almost all newly started open source projects now choose Subversion instead of CVS.
+
+This book is written to document the 1.5 series of the Subversion version control system. We have made every attempt to be thorough in our coverage. However, Subversion has a thriving and energetic development community, so already a number of features and improvements are planned for future versions that may change some of the commands and specific notes in this book.
+Audience
+
+This book is written for computer-literate folk who want to use Subversion to manage their data. While Subversion runs on a number of different operating systems, its primary user interface is command-line-based. That command-line tool (svn), and some auxiliary programs, are the focus of this book.
+
+For consistency, the examples in this book assume that the reader is using a Unix-like operating system and is relatively comfortable with Unix and command-line interfaces. That said, the svn program also runs on non-Unix platforms such as Microsoft Windows. With a few minor exceptions, such as the use of backward slashes (\) instead of forward slashes (/) for path separators, the input to and output from this tool when run on Windows are identical to its Unix counterpart.
+
+Most readers are probably programmers or system administrators who need to track changes to source code. This is the most common use for Subversion, and therefore it is the scenario underlying all of the book's examples. But Subversion can be used to manage changes to any sort of information—images, music, databases, documentation, and so on. To Subversion, all data is just data.
+
+While this book is written with the assumption that the reader has never used a version control system, we've also tried to make it easy for users of CVS (and other systems) to make a painless leap into Subversion. Special sidebars may mention other version control systems from time to time, and Appendix B summarizes many of the differences between CVS and Subversion.
+
+Note also that the source code examples used throughout the book are only examples. While they will compile with the proper compiler incantations, they are intended to illustrate a particular scenario and not necessarily to serve as examples of good programming style or practices.
+How to Read This Book
+
+Technical books always face a certain dilemma: whether to cater to top-down or to bottom-up learners. A top-down learner prefers to read or skim documentation, getting a large overview of how the system works; only then does she actually start using the software. A bottom-up learner is a “learn by doing” person—someone who just wants to dive into the software and figure it out as she goes, referring to book sections when necessary. Most books tend to be written for one type of person or the other, and this book is undoubtedly biased toward top-down learners. (And if you're actually reading this section, you're probably already a top-down learner yourself!) However, if you're a bottom-up person, don't despair. While the book may be laid out as a broad survey of Subversion topics, the content of each section tends to be heavy with specific examples that you can try-by-doing. For the impatient folks who just want to get going, you can jump right to Appendix A, Subversion Quick-Start Guide.
+
+Regardless of your learning style, this book aims to be useful to people of widely different backgrounds—from those with no previous experience in version control to experienced system administrators. Depending on your own background, certain chapters may be more or less important to you. The following can be considered a “recommended reading list” for various types of readers:
+
+Experienced system administrators
+
+    The assumption here is that you've probably used version control before and are dying to get a Subversion server up and running ASAP. Chapter 5, Repository Administration and Chapter 6, Server Configuration will show you how to create your first repository and make it available over the network. After that's done, Chapter 2, Basic Usage and Appendix B, Subversion for CVS Users are the fastest routes to learning the Subversion client.
+New users
+
+    Your administrator has probably set up Subversion already, and you need to learn how to use the client. If you've never used a version control system, then Chapter 1, Fundamental Concepts is a vital introduction to the ideas behind version control. Chapter 2, Basic Usage is a guided tour of the Subversion client.
+Advanced users
+
+    Whether you're a user or administrator, eventually your project will grow larger. You're going to want to learn how to do more advanced things with Subversion, such as how to use Subversion's property support (Chapter 3, Advanced Topics), how to use branches and perform merges (Chapter 4, Branching and Merging), how to configure runtime options (Chapter 7, Customizing Your Subversion Experience), and other things. These chapters aren't critical at first, but be sure to read them once you're comfortable with the basics.
+Developers
+
+    Presumably, you're already familiar with Subversion, and now want to either extend it or build new software on top of its many APIs. Chapter 8, Embedding Subversion is just for you.
+
+The book ends with reference material—Chapter 9, Subversion Complete Reference is a reference guide for all Subversion commands, and the appendixes cover a number of useful topics. These are the chapters you're mostly likely to come back to after you've finished the book.
+Conventions Used in This Book
+
+The following typographic conventions are used in this book:
+
+Constant width
+
+    Used for literal user input, command output, and command-line options
+Italic
+
+    Used for program and Subversion tool subcommand names, file and directory names, and new terms
+Constant width italic
+
+    Used for replaceable items in code and text
+
+Also, we sprinkled especially helpful or important bits of information throughout the book (in contextually relevant locations), set off visually so they're easy to find. Look for the following icons as you read:
+Note
+
+This icon designates a special point of interest.
+Tip
+
+This icon designates a helpful tip or recommended best practice.
+Warning
+
+This icon designates a warning. Pay close attention to these to avoid running into problems.
+Organization of This Book
+
+The chapters that follow and their contents are listed here:
+
+Chapter 1, Fundamental Concepts
+
+    Explains the basics of version control and different versioning models, along with Subversion's repository, working copies, and revisions.
+Chapter 2, Basic Usage
+
+    Walks you through a day in the life of a Subversion user. It demonstrates how to use a Subversion client to obtain, modify, and commit data.
+Chapter 3, Advanced Topics
+
+    Covers more complex features that regular users will eventually come into contact with, such as versioned metadata, file locking, and peg revisions.
+Chapter 4, Branching and Merging
+
+    Discusses branches, merges, and tagging, including best practices for branching and merging, common use cases, how to undo changes, and how to easily swing from one branch to the next.
+Chapter 5, Repository Administration
+
+    Describes the basics of the Subversion repository, how to create, configure, and maintain a repository, and the tools you can use to do all of this.
+Chapter 6, Server Configuration
+
+    Explains how to configure your Subversion server and offers different ways to access your repository: HTTP, the svn protocol, and local disk access. It also covers the details of authentication, authorization and anonymous access.
+Chapter 7, Customizing Your Subversion Experience
+
+    Explores the Subversion client configuration files, the handling of internationalized text, and how to make external tools cooperate with Subversion.
+Chapter 8, Embedding Subversion
+
+    Describes the internals of Subversion, the Subversion filesystem, and the working copy administrative areas from a programmer's point of view. It also demonstrates how to use the public APIs to write a program that uses Subversion.
+Chapter 9, Subversion Complete Reference
+
+    Explains in great detail every subcommand of svn, svnadmin, and svnlook with plenty of examples for the whole family!
+Appendix A, Subversion Quick-Start Guide
+
+    For the impatient, a whirlwind explanation of how to install Subversion and start using it immediately. You have been warned.
+Appendix B, Subversion for CVS Users
+
+    Covers the similarities and differences between Subversion and CVS, with numerous suggestions on how to break all the bad habits you picked up from years of using CVS. Included are descriptions of Subversion revision numbers, versioned directories, offline operations, update versus status, branches, tags, metadata, conflict resolution, and authentication.
+Appendix C, WebDAV and Autoversioning
+
+    Describes the details of WebDAV and DeltaV and how you can configure your Subversion repository to be mounted read/write as a DAV share.
+Appendix D, Copyright
+
+    A copy of the Creative Commons Attribution License, under which this book is licensed.
+
+This Book Is Free
+
+This book started out as bits of documentation written by Subversion project developers, which were then coalesced into a single work and rewritten. As such, it has always been under a free license (see Appendix D, Copyright). In fact, the book was written in the public eye, originally as part of the Subversion project itself. This means two things:
+
+    *
+
+      You will always find the latest version of this book in the book's own Subversion repository.
+    *
+
+      You can make changes to this book and redistribute it however you wish—it's under a free license. Your only obligation is to maintain proper attribution to the original authors. Of course, we'd much rather you send feedback and patches to the Subversion developer community, instead of distributing your private version of this book.
+
+The online home of this book's development and most of the volunteer-driven translation efforts regarding it is http://svnbook.red-bean.com. There you can find links to the latest releases and tagged versions of the book in various formats, as well as instructions for accessing the book's Subversion repository (where its DocBook XML source code lives). Feedback is welcomed—encouraged, even. Please submit all comments, complaints, and patches against the book sources to <svnbook-dev@red-bean.com>.
+Acknowledgments
+
+This book would not be possible (nor very useful) if Subversion did not exist. For that, the authors would like to thank Brian Behlendorf and CollabNet for the vision to fund such a risky and ambitious new open source project; Jim Blandy for the original Subversion name and design—we love you, Jim; and Karl Fogel for being such a good friend and a great community leader, in that order. [1]
+
+Thanks to O'Reilly and our various editors: Chuck Toporek, Linda Mui, Tatiana Apandi, Mary Brady, and Mary Treseler. Their patience and support has been tremendous.
+
+Finally, we thank the countless people who contributed to this book with informal reviews, suggestions, and patches. While this is undoubtedly not a complete list, this book would be incomplete and incorrect without their help: Bhuvaneswaran A, David Alber, C. Scott Ananian, David Anderson, Ariel Arjona, Seth Arnold, Jani Averbach, Charles Bailey, Ryan Barrett, Francois Beausoleil, Brian R. Becker, Yves Bergeron, Karl Berry, Jennifer Bevan, Matt Blais, Jim Blandy, Phil Bordelon, Sietse Brouwer, Tom Brown, Zack Brown, Martin Buchholz, Paul Burba, Sean Callan-Hinsvark, Branko Cibej, Archie Cobbs, Jason Cohen, Ryan Cresawn, John R. Daily, Peter Davis, Olivier Davy, Robert P. J. Day, Mo DeJong, Brian Denny, Joe Drew, Markus Dreyer, Nick Duffek, Boris Dusek, Ben Elliston, Justin Erenkrantz, Jens M. Felderhoff, Kyle Ferrio, Shlomi Fish, Julian Foad, Chris Foote, Martin Furter, Vlad Georgescu, Peter Gervai, Dave Gilbert, Eric Gillespie, David Glasser, Marcel Gosselin, Lieven Govaerts, Steve Greenland, Matthew Gregan, Tom Gregory, Maverick Grey, Art Haas, Mark E. Hamilton, Eric Hanchrow, Liam Healy, Malte Helmert, Michael Henderson, Øyvind A. Holm, Greg Hudson, Alexis Huxley, Auke Jilderda, Toby Johnson, Jens B. Jorgensen, Tez Kamihira, David Kimdon, Mark Benedetto King, Robert Kleemann, Erik Kline, Josh Knowles, Andreas J. Koenig, Axel Kollmorgen, Nuutti Kotivuori, Kalin Kozhuharov, Matt Kraai, Regis Kuckaertz, Stefan Kueng, Steve Kunkee, Scott Lamb, Wesley J. Landaker, Benjamin Landsteiner, Vincent Lefevre, Morten Ludvigsen, Dennis Lundberg, Paul Lussier, Bruce A. Mah, Jonathon Mah, Karl Heinz Marbaise, Philip Martin, Feliciano Matias, Neil Mayhew, Patrick Mayweg, Gareth McCaughan, Craig McElroy, Simon McKenna, Christophe Meresse, Jonathan Metillon, Jean-Francois Michaud, Jon Middleton, Robert Moerland, Marcel Molina Jr., Tim Moloney, Alexander Mueller, Tabish Mustufa, Christopher Ness, Roman Neuhauser, Mats Nilsson, Greg Noel, Joe Orton, Eric Paire, Dimitri Papadopoulos-Orfanos, Jerry Peek, Chris Pepper, Amy Lyn Pilato, Kevin Pilch-Bisson, Hans Polak, Dmitriy Popkov, Michael Price, Mark Proctor, Steffen Prohaska, Daniel Rall, Srinivasa Ramanujan, Jack Repenning, Tobias Ringstrom, Jason Robbins, Garrett Rooney, Joel Rosdahl, Christian Sauer, Ryan Schmidt, Jochem Schulenklopper, Jens Seidel, Daniel Shahaf, Larry Shatzer, Danil Shopyrin, Erik Sjoelund, Joey Smith, W. Snyder, Stefan Sperling, Robert Spier, M. S. Sriram, Russell Steicke, David Steinbrunner, Sander Striker, David Summers, Johan Sundstroem, Ed Swierk, John Szakmeister, Arfrever Frehtes Taifersar Arahesis, Robert Tasarz, Michael W. Thelen, Mason Thomas, Erik van der Kolk, Joshua Varner, Eric Wadsworth, Chris Wagner, Colin Watson, Alex Waugh, Chad Whitacre, Andy Whitcroft, Josef Wolf, Luke Worth, Hyrum Wright, Blair Zajac, Florian Zumbiehl, and the entire Subversion community.
+From Ben Collins-Sussman
+
+Thanks to my wife Frances, who, for many months, got to hear “But honey, I'm still working on the book,” rather than the usual “But honey, I'm still doing email.” I don't know where she gets all that patience! She's my perfect counterbalance.
+
+Thanks to my extended family and friends for their sincere encouragement, despite having no actual interest in the subject. (You know, the ones who say, “Ooh, you wrote a book?” and then when you tell them it's a computer book, sort of glaze over.)
+
+Thanks to all my close friends, who make me a rich, rich man. Don't look at me that way—you know who you are.
+
+Thanks to my parents for the perfect low-level formatting and being unbelievable role models. Thanks to my kids for the opportunity to pass that on.
+From Brian W. Fitzpatrick
+
+Huge thanks to my wife Marie for being incredibly understanding, supportive, and most of all, patient. Thank you to my brother Eric who first introduced me to Unix programming way back when. Thanks to my Mom and Grandmother for all their support, not to mention enduring a Christmas holiday where I came home and promptly buried my head in my laptop to work on the book.
+
+To Mike and Ben: it was a pleasure working with you on the book. Heck, it's a pleasure working with you at work!
+
+To everyone in the Subversion community and the Apache Software Foundation, thanks for having me. Not a day goes by where I don't learn something from at least one of you.
+
+Lastly, thanks to my grandfather, who always told me that “freedom equals responsibility.” I couldn't agree more.
+From C. Michael Pilato
+
+Special thanks to Amy, my best friend and wife of more than ten incredible years, for her love and patient support, for putting up with the late nights, and for graciously enduring the version control processes I've imposed on her. Don't worry, sweetheart—you'll be a TortoiseSVN wizard in no time!
+
+Gavin, you're able to read half of the words in this book yourself now; sadly, it's the other half that provide the key concepts. And sorry, Aidan — I couldn't find a way to work Disney/Pixar characters into the text. But Daddy loves you both, and can't wait to teach you about programming.
+
+Mom and Dad, thanks for your constant support and enthusiasm. Mom- and Dad-in-law, thanks for all of the same plus your fabulous daughter.
+
+Hats off to Shep Kendall, through whom the world of computers was first opened to me; Ben Collins-Sussman, my tour guide through the open source world; Karl Fogel, you are my .emacs; Greg Stein, for oozing practical programming know-how; and Brian Fitzpatrick, for sharing this writing experience with me. To the many folks from whom I am constantly picking up new knowledge—keep dropping it!
+
+Finally, to the One who perfectly demonstrates creative excellence—thank You.
